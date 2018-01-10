@@ -1,0 +1,54 @@
+//https://www.hackerrank.com/challenges/happy-ladybugs/problem
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int Q,n,res;
+    string b;
+    cin >> Q;
+    for(int a0 = 0; a0 < Q; a0++)
+    {
+        cin >> n;
+        cin >> b;
+        res=1;
+        for(char i='A'; i<='Z'; i++)
+        {
+            int cnt=0;
+            for(int j=0; j<n; j++)
+            {
+                if(b[j]==i) cnt++;
+            }
+            if(cnt==1)
+            {
+                //if there is only one bug of any kind, it can't be happy 
+                //as it cant have any partners.
+                res=0; 
+                break;   
+            }
+        }
+        if(res)
+        {
+            int cnt_=0;
+            for(int i=0; i<n; i++)
+                if(b[i]=='_') cnt_++;
+            //if there r no empty cells , we cant't adjust the bugs. But, if they 
+            //are already happy we can print yes, so we need to check this condition
+            if(cnt_==0)
+                for(int i=1; i<(n-1); i++)
+                    if(b[i]!=b[i+1] && b[i]!=b[i-1]) 
+                    {
+                        // not all the bugs are happy.
+                        res=0; 
+                        break;
+                    }
+        }
+        if(res)
+            cout << "YES" << endl;
+        else 
+            cout << "NO" << endl;
+    }
+    return 0;
+}
