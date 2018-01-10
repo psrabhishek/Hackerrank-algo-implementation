@@ -1,0 +1,35 @@
+//
+#include <stack>
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  long n, m, tmp,i;
+  cin >> n;
+  // use stack for easy implementation
+  stack<long> scores;
+  //input the current leader board
+  for (i = 0; i < n; ++i) 
+  {
+    cin >> tmp;
+    //dont push the duplicate marks.
+    //push only if stack is empty or if top and tmp are not same
+    if (scores.empty()|| scores.top() != tmp) 
+        scores.push(tmp);
+  }
+  cin >> m;
+  //output the position of Alice for each level
+  for (i = 0; i < m; ++i) 
+  {
+    cin >> tmp;
+    //pop out all scores which have less or equal marks of Alice
+    //then the size of stack would be rank of person just above Alice
+    //so rank of Alice would be stack size+1
+    while (!scores.empty() && tmp >= scores.top()) 
+        scores.pop();
+    cout << scores.size() + 1 << endl;
+  }
+  return 0;
+}
