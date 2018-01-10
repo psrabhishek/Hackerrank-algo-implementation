@@ -1,4 +1,9 @@
 //https://www.hackerrank.com/challenges/larrys-array/problem
+
+/*It is based upon the inversions.(An inversion is when a tile precedes another tile with a lower number on it).
+This questions is solvable only if no of inversions is even.
+it is similar to 15 tiles problem: https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
