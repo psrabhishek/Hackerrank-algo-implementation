@@ -1,0 +1,30 @@
+//https://www.hackerrank.com/challenges/circular-array-rotation/problem
+#include <sstream>
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n,k,q,m;
+    cin >> n >> k >> q;
+    int a[n];
+    k=k%n;
+    for(int a_i = 0;a_i < n;a_i++)
+       cin >> a[a_i];
+    for(int a0 = 0; a0 < q; a0++)
+    {
+        cin >> m;
+        //if m is less than k, it contains
+        //the elements from right end. So index would be 
+        // index = m + no of elements shifted from end to first(n-k)
+        if(m<k)
+            m=m+n-k;
+        //else it is normal condition where its index was shifted by k units
+        //so index = m-k 
+        else
+            m=m-k;
+        cout<<a[m]<<endl;
+    }
+    return 0;
+}
