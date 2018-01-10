@@ -1,0 +1,71 @@
+//https://www.hackerrank.com/challenges/matrix-rotation-algo/problem/
+
+#include <iostream>
+
+using namespace std;
+
+int main() 
+{
+	int M, N, R,tmp;
+	cin>>M>>N>>R;
+	int mat[M][N],i,j;
+	for(i = 0; i < M; i++) 
+		for(j = 0; j < N; j++) 
+			cin>>mat[i][j];
+    //calculate no of rings
+	int Rings = min(M,N)/2;
+	for(i = 0; i < Rings; i++) 
+    {
+        //calculate num of rotations , without complete rotations
+        
+		int Rotations = R%(2*(M + N - 4*i) - 4);
+        
+        //as we go inside each ring, 4 corners r removed so subtract 4i
+        //total elements in ring is 2(M + N- 4*i) , but we subtract 4 again as 
+        // we dont consider corners while rotating. so it can be written as
+        // 2 * ( (M-1) + (N-1) - 4*i ) =  2 * (M + N - 4*i) - 4
+        
+		for(int rot = 0; rot < Rotations; rot++) 
+        {
+            // we swap the first element in a clock wise manner, but due 
+            // to that the elements move to left i.e, anti-clock wise way
+            
+            //rotating top row
+			for(int j = i; j < N-i-1; j++) 
+            {
+				tmp = mat[i][j];
+				mat[i][j] = mat[i][j+1];
+				mat[i][j+1] = tmp;
+			}
+			// rotating right column
+			for(j = i; j < M-i-1; j++) 
+            {
+				tmp = mat[j][N-i-1];
+				mat[j][N-i-1] = mat[j+1][N-i-1];
+				mat[j+1][N-i-1] = tmp;
+			}
+			// rotating bottom row
+			for(j = N-i-1; j > i; j--) 
+            {
+				tmp = mat[M-i-1][j];
+				mat[M-i-1][j] = mat[M-i-1][j-1];
+				mat[M-i-1][j-1] = tmp;
+			}
+			// rotating left column
+			for(j = M-i-1; j > i+1; j--) 
+            {
+				tmp = mat[j][i];
+				mat[j][i] = mat[j-1][i];
+				mat[j-1][i] = tmp;
+			}
+		}
+	}
+    //output the matrix
+	for(i = 0; i < M; i++)
+    {
+		for(j = 0; j < N; j++)
+			cout<<mat[i][j]<<" ";
+		cout<<"\n";
+	}
+    return 0;
+}
