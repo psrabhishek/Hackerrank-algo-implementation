@@ -1,0 +1,24 @@
+//https://www.hackerrank.com/challenges/encryption/problem
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() 
+{
+    string s;
+    cin >> s;
+    int n = s.size();
+    int row = round(sqrt(n));
+    int col;
+    if (row >= sqrt(n))
+        col = row; 
+    else 
+        col = row + 1;
+    for(int j=0;j<col;++j) 
+    {
+        for(int i=j; i<n;i+=col)
+            cout << s[i];
+        cout << ' ';
+    }
+    return 0;
+}
