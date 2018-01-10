@@ -1,0 +1,68 @@
+//https://www.hackerrank.com/challenges/append-and-delete/problem
+
+#include <string>
+#include <cstring>
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int k;
+    string s,t;
+    cin >> s>>t>>k;
+    int i,count=0,len1,len2,min,max,count1;
+    min=len1=s.length();
+    max=len2=t.length();
+    if(len2<min)
+        min=len2;
+    if(len1>max)
+        max=len1;
+    for(i=0;i<min;i++)
+    {
+        if(s[i]==t[i])
+            count++;
+        else
+            break;
+    }
+    //after finding the no of different terms it is 
+    //based on basic conditions to evaluate wether
+    // yes or no
+    count1=max+min-(2*count);
+    if(count1==1)
+    {
+        //we need min 2 operations ,one del and one append
+        //it also satisfies if even time, just do del and append in extra cases
+        if(k%2==0)
+            cout<<"No";
+        else
+            cout<<"Yes";
+    }
+    else if(count1==0)
+    {
+        //the strings r same, so the k should be even     
+        if(k%2==0)
+            cout<<"Yes";
+        // or more than 2*max of both strings   
+        else if(k>(2*max))
+            cout<<"Yes";
+        else
+            cout<<"No";
+    }
+    else
+    {
+        //if k < than no of different elements it is not possible
+        if(count1>k)
+            cout<<"No";
+        // if k-count1 is even it's possible
+        else if((k-count1)%2==0)
+            cout<<"Yes";
+        // if size of s > size of t and k > total length, its possible
+        else if(len1>=len2 && k>=(len1+len2))
+            cout<<"Yes";
+        else 
+            cout<<"No";
+    }    
+    return 0;
+}
